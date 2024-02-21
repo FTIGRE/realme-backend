@@ -1,36 +1,40 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config');
+const error = require('../middleware/error');
 const secret = config.jwt.secret;
-function asignarToken(data){
+function asignarToken(data) {
     return jwt.sign(data, secret);
 }
 
-function verificarToken(token){
+function verificarToken(token) {
     jwt.verify(token, secret);
 }
 
 const checkToken = {
-    confirmarToken: function(req){
+    confirmarToken: function (req, id) {
         const decodificado = decodificarCabecera(req);
+        if (decodificado.id !== id) {
+            throw error('No tienes privilegios para hacer esto', 401)
+        }
     }
 }
 
-function obtenerToken(autorizacion){
+function obtenerToken(autorizacion) {
     if (!autorizacion) {
-        throw new Error('No viene token');
+        throw error('No viene token', 401);
     }
-    if (autorizacion.indexOf('Bearer')===-1) {
-        throw new Error('Formato inválido');
+    if (autorizacion.indexOf('Bearer') === -1) {
+        throw error('Formato inválido', 401);
     }
-    let token = autorizacion.replace('Bearer ','');
+    let token = autorizacion.replace('Bearer ', '');
     return token;
 }
 
 
-function decodificarCabecera(req){
+function decodificarCabecera(req) {
     const autorizacion = req.headers.authorization || '';
     const token = obtenerToken(autorizacion);
-    const decodificado=verificarToken(token);
+    const decodificado = verificarToken(token);
     req.user = decodificado;
     return decodificado;
 }

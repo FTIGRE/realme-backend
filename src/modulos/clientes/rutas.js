@@ -7,8 +7,8 @@ const controlador = require('./index');
 
 router.get('/', todos);
 router.get('/:id', uno);
-router.put('/', seguridad(),eliminar);
-router.post('/', agregar);
+router.put('/', seguridad(), eliminar);
+router.post('/', seguridad(), agregar);
 
 async function todos(req, res, next) {
     try {
