@@ -7,6 +7,7 @@ const usuarios = require('./modulos/usuarios/rutas');
 const membresias = require('./modulos/membresias/rutas');
 const productos = require('./modulos/productos/rutas');
 const compras = require('./modulos/compras/rutas');
+const rutinas = require('./modulos/rutinas/rutas');
 const auth = require('./modulos/auth/rutas');
 const error = require('./red/errors');
 
@@ -26,6 +27,7 @@ app.use('/api/usuarios', usuarios);
 app.use('/api/membresias', membresias);
 app.use('/api/productos', productos);
 app.use('/api/compras', compras);
+app.use('/api/rutinas', rutinas);
 app.use('/api/auth', auth);
 app.use(error);
 module.exports = app;

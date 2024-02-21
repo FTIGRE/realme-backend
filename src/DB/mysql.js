@@ -10,7 +10,6 @@ const dbconfig = {
 let conexion;
 
 function conmysql() {
-    console.log(dbconfig);
     conexion = mysql.createConnection(dbconfig);
     conexion.connect((err) => {
         if (err) {
