@@ -1,4 +1,4 @@
-const auth = require('../../auth');
+const auth = require('./auth');
 module.exports = function checkAuth (){
     function middleware(req, res, next){
         const id = req.body.id;
