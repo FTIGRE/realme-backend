@@ -44,6 +44,15 @@ function uno(tabla, id) {
         })
     });
 }
+
+function buscar(tabla, columna, valor) {
+    return new Promise((resolve, reject) => {
+        conexion.query(`SELECT * FROM ${tabla} WHERE ${columna}='${valor}'`, (error, result) => {
+            return error ? reject(error) : resolve(result);
+        })
+    });
+}
+
 function agregar(tabla, data) {
     return new Promise((resolve, reject) => {
         conexion.query(`INSERT INTO ${tabla} SET ? ON DUPLICATE KEY UPDATE ?`, [data, data], (error, result) => {
@@ -70,6 +79,7 @@ function query(tabla, consulta) {
 module.exports = {
     todos,
     uno,
+    buscar,
     agregar,
     eliminar,
     query
