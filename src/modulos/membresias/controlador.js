@@ -18,7 +18,7 @@ module.exports = function (dbInyectada) {
     }
 
     function buscar(columna, valor) {
-        return db.uno(TABLA, columna, valor);
+        return db.buscar(TABLA, columna, valor);
     }
 
     function agregar(body) {
