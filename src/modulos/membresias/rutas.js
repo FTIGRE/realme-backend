@@ -29,7 +29,8 @@ async function uno(req, res, next) {
 
 async function buscar(req, res, next) {
     try {
-        const { column, value } = req.params;
+        const column = req.params.columna;
+        const value = req.params.valor;
         const items = await controlador.buscar(column, value);
         respuesta.success(req, res, items, 200);
     } catch (error) {
