@@ -47,7 +47,7 @@ function uno(tabla, id) {
 
 function buscar(tabla, columna, valor) {
     return new Promise((resolve, reject) => {
-        conexion.query(`SELECT * FROM ${tabla} WHERE ${columna}='${valor}'`, (error, result) => {
+        conexion.query(`SELECT * FROM ${tabla} WHERE ${columna} LIKE '%${valor}%'`, (error, result) => {
             return error ? reject(error) : resolve(result);
         })
     });
