@@ -5,6 +5,7 @@ const controlador = require('./index');
 
 router.get('/', todos);
 router.get('/:id', uno);
+router.get('/:columna/:valor', buscar);
 router.put('/', eliminar);
 router.post('/', agregar);
 
@@ -20,6 +21,17 @@ async function todos(req, res, next) {
 async function uno(req, res, next) {
     try {
         const items = await controlador.uno(req.params.id);
+        respuesta.success(req, res, items, 200);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function buscar(req, res, next) {
+    try {
+        const column = req.params.columna;
+        const value = req.params.valor;
+        const items = await controlador.buscar(column, value);
         respuesta.success(req, res, items, 200);
     } catch (error) {
         next(error);

@@ -15,6 +15,10 @@ module.exports = function (dbInyectada) {
         return db.uno(TABLA, id);
     }
 
+    function buscar(columna, valor) {
+        return db.buscar(TABLA, columna, valor);
+    }
+
     function agregar(body) {
         return db.agregar(TABLA, body);
     }
@@ -26,6 +30,7 @@ module.exports = function (dbInyectada) {
     return {
         todos,
         uno,
+        buscar,
         agregar,
         eliminar
     }
