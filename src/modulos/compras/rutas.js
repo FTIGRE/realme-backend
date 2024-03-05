@@ -34,6 +34,7 @@ async function agregar(req, res, next) {
         } else {
             mensaje = 'Item actualizado'
         }
+        req.io.emit('newPurchase');
         respuesta.success(req, res, mensaje, 200);
     } catch (error) {
         next(error);
@@ -42,6 +43,7 @@ async function agregar(req, res, next) {
 async function eliminar(req, res, next) {
     try {
         const items = await controlador.eliminar(req.body);
+        req.io.emit('newPurchase');
         respuesta.success(req, res, 'Item eliminado', 200);
     } catch (error) {
         next(error);
