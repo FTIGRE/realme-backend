@@ -41,5 +41,6 @@ function decodificarCabecera(req) {
 
 module.exports = {
     asignarToken,
-    checkToken
+    checkToken,
+    verificarToken
 }
