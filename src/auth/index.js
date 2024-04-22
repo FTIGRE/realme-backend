@@ -3,7 +3,8 @@ const config = require('../config');
 const error = require('../middleware/error');
 const secret = config.jwt.secret;
 function asignarToken(data) {
-    return jwt.sign(data, secret);
+    const expiresIn = 604800;
+    return jwt.sign(data, secret,{expiresIn});
 }
 
 function verificarToken(token) {
