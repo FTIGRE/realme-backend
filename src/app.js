@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const http = require('http');
 const config = require('./config');
 const socketIo = require('socket.io');
+const cors = require('cors');
 
 const clientes = require('./modulos/clientes/rutas');
 const usuarios = require('./modulos/usuarios/rutas');
@@ -20,7 +21,7 @@ const io = socketIo(server);
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-
+app.use(cors());
 //configuracion
 app.set('port', config.app.port);
 
