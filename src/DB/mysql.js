@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const config = require('../config');
+const cron = require('node-cron');
 
 const dbconfig = {
     host: config.mysql.host,
@@ -29,6 +30,20 @@ function conmysql() {
     })
 }
 conmysql();
+
+cron.schedule('0 0 * * *', async () => {
+    try {
+        const result = await new Promise((resolve, reject) => {
+            conexion.query('UPDATE memberships SET state = "expired" WHERE state = "active" AND end_date < NOW()', (error, result) => {
+                return error ? reject(error) : resolve(result);
+            });
+        });
+        console.log('Memberships updated:', result);
+    } catch (error) {
+        console.error('Error updating memberships:', error);
+    }
+});
+
 function todos(tabla) {
     return new Promise((resolve, reject) => {
         conexion.query(`SELECT* FROM ${tabla}`, (error, result) => {
@@ -68,6 +83,7 @@ function eliminar(tabla, data) {
         })
     });
 }
+
 function query(tabla, consulta) {
     return new Promise((resolve, reject) => {
         conexion.query(`SELECT * FROM ${tabla} WHERE ?`, consulta, (error, result) => {
@@ -77,6 +93,7 @@ function query(tabla, consulta) {
 }
 
 module.exports = {
+    conexion,
     todos,
     uno,
     buscar,

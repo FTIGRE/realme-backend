@@ -3,9 +3,10 @@ const respuesta = require('../../red/respuestas');
 const router = express.Router();
 const controlador = require('./index');
 
-router.get('/', todos);
-router.get('/:id', uno);
+router.get('/memberships/:state', getClientwMembership);
 router.get('/:columna/:valor', buscar);
+router.get('/:id', uno);
+router.get('/', todos);
 router.put('/', eliminar);
 router.post('/', agregar);
 
@@ -57,6 +58,16 @@ async function eliminar(req, res, next) {
         const items = await controlador.eliminar(req.body);
         req.io.emit('newClient');
         respuesta.success(req, res, 'Item eliminado', 200);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function getClientwMembership(req, res, next) {
+    try {
+        const state = req.params.state;
+        const items = await controlador.getClientwMembership(state);
+        respuesta.success(req, res, items, 200);
     } catch (error) {
         next(error);
     }

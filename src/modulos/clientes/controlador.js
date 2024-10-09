@@ -1,4 +1,5 @@
 const TABLA = 'clients';
+const clientReqs = require('../../DB/clients/clients.requests');
 
 module.exports = function (dbInyectada) {
 
@@ -27,11 +28,16 @@ module.exports = function (dbInyectada) {
         return db.eliminar(TABLA, body);
     }
 
+    function getClientwMembership(state) {
+        return clientReqs.getClientwMembership(state);
+    }
+
     return {
         todos,
         uno,
         buscar,
         agregar,
-        eliminar
+        eliminar,
+        getClientwMembership
     }
 }
