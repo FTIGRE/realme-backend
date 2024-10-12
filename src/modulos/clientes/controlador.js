@@ -32,12 +32,17 @@ module.exports = function (dbInyectada) {
         return clientReqs.getClientwMembership(state);
     }
 
+    function getClientwDebt() {
+        return clientReqs.getClientwDebt();
+    }
+
     return {
         todos,
         uno,
         buscar,
         agregar,
         eliminar,
-        getClientwMembership
+        getClientwMembership,
+        getClientwDebt
     }
 }

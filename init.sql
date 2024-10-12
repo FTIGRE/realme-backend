@@ -93,13 +93,14 @@ DROP TABLE IF EXISTS `purchases`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `purchases` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `client_name` varchar(255) DEFAULT NULL,
+  `client_id` int NOT NULL,
   `product_id` int DEFAULT NULL,
   `quantity` int NOT NULL,
   `p_date` date NOT NULL,
   `method` enum('cash','transfer','credit') NOT NULL,
   `debt` decimal(6,2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  CONSTRAINT `purchases_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

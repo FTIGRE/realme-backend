@@ -1,4 +1,5 @@
 const TABLA = 'purchases';
+const salesReqs = require('../../DB/clients/sales.requests');
 
 
 
@@ -29,11 +30,16 @@ module.exports = function (dbInyectada) {
         return db.eliminar(TABLA, body);
     }
 
+    function getSalesDetails() {
+        return salesReqs.getSalesDetails();
+    }
+
     return {
         todos,
         uno,
         buscar,
         agregar,
-        eliminar
+        eliminar,
+        getSalesDetails
     }
 }
