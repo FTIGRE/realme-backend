@@ -30,8 +30,8 @@ module.exports = function (dbInyectada) {
         return db.eliminar(TABLA, body);
     }
 
-    function getSalesDetails() {
-        return salesReqs.getSalesDetails();
+    function getSalesDetails(date) {
+        return salesReqs.getSalesDetails(date);
     }
 
     return {
