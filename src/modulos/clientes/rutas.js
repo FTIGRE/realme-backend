@@ -4,6 +4,7 @@ const router = express.Router();
 const controlador = require('./index');
 
 router.get('/memberships/:state', getClientwMembership);
+router.get('/debts/:id', getClientDebts);
 router.get('/debts', getClientwDebt);
 router.get('/:columna/:valor', buscar);
 router.get('/:id', uno);
@@ -77,6 +78,15 @@ async function getClientwMembership(req, res, next) {
 async function getClientwDebt(req, res, next) {
     try {
         const items = await controlador.getClientwDebt();
+        respuesta.success(req, res, items, 200);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function getClientDebts(req, res, next) {
+    try {
+        const items = await controlador.getClientDebts(req.params.id);
         respuesta.success(req, res, items, 200);
     } catch (error) {
         next(error);

@@ -36,6 +36,10 @@ module.exports = function (dbInyectada) {
         return clientReqs.getClientwDebt();
     }
 
+    function getClientDebts(id) {
+        return clientReqs.getClientDebts(id);
+    }
+
     return {
         todos,
         uno,
@@ -43,6 +47,7 @@ module.exports = function (dbInyectada) {
         agregar,
         eliminar,
         getClientwMembership,
-        getClientwDebt
+        getClientwDebt,
+        getClientDebts
     }
 }
