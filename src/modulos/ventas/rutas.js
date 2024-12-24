@@ -3,6 +3,7 @@ const respuesta = require('../../red/respuestas');
 const router = express.Router();
 const controlador = require('./index');
 
+router.get('/details/:date', getSalesDetails);
 router.get('/', todos);
 router.get('/:id', uno);
 router.get('/:columna/:valor', buscar);
@@ -57,6 +58,16 @@ async function eliminar(req, res, next) {
         const items = await controlador.eliminar(req.body);
         req.io.emit('newPurchase');
         respuesta.success(req, res, 'Item eliminado', 200);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function getSalesDetails(req, res, next) {
+    try {
+        const date = req.params.date;
+        const items = await controlador.getSalesDetails(date);
+        respuesta.success(req, res, items, 200);
     } catch (error) {
         next(error);
     }
