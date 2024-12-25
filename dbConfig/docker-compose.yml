@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  mysql:
+    build: .
+    container_name: realme_db
+    env_file:
+      - .env.database
+    ports:
+      - 3306:3306
+    volumes:
+      - realme_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: --default-authentication-plugin=mysql_native_password
+volumes:
+  realme_data:
