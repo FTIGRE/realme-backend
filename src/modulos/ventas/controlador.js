@@ -34,12 +34,22 @@ module.exports = function (dbInyectada) {
         return salesReqs.getSalesDetails(date);
     }
 
+    function getMonthlySummary(month, year) {
+        return salesReqs.getMonthlySummary(month, year);
+    }
+
+    function getDailySummary(date) {
+        return salesReqs.getDailySummary(date);
+    }
+
     return {
         todos,
         uno,
         buscar,
         agregar,
         eliminar,
-        getSalesDetails
+        getSalesDetails,
+        getMonthlySummary,
+        getDailySummary
     }
 }
