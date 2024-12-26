@@ -4,6 +4,8 @@ const router = express.Router();
 const controlador = require('./index');
 
 router.get('/details/:date', getSalesDetails);
+router.get('/monthly/:month/:year', getMonthlySummary);
+router.get('/daily/:date(*)', getDailySummary);
 router.get('/', todos);
 router.get('/:id', uno);
 router.get('/:columna/:valor', buscar);
@@ -67,6 +69,27 @@ async function getSalesDetails(req, res, next) {
     try {
         const date = req.params.date;
         const items = await controlador.getSalesDetails(date);
+        respuesta.success(req, res, items, 200);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function getMonthlySummary(req, res, next) {
+    try {
+        const month = req.params.month;
+        const year = req.params.year;
+        const items = await controlador.getMonthlySummary(month, year);
+        respuesta.success(req, res, items, 200);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function getDailySummary(req, res, next) {
+    try {
+        const date = req.params.date;
+        const items = await controlador.getDailySummary(date);
         respuesta.success(req, res, items, 200);
     } catch (error) {
         next(error);
