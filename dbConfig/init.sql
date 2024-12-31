@@ -41,7 +41,7 @@ DROP TABLE IF EXISTS `clients`;
 CREATE TABLE `clients` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
-  `ic` int DEFAULT NULL,
+  `ic` varchar(10) DEFAULT NULL,
   `BDate` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ci` (`ic`),
