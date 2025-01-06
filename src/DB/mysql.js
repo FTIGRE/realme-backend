@@ -22,9 +22,10 @@ function conmysql() {
     });
     conexion.on('error', err => {
         console.log(err);
-        if (err) {
-            console.log(err);
+        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
             conmysql();
+        } else {
+            throw err;
         }
     })
 }
